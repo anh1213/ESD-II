@@ -12,7 +12,7 @@ server_port = 55001;           %Server Port of the Unity Sever
 client = tcpclient(server_ip,server_port);
 fprintf(1,"Connected to server\n");
 
-depth = 0
+depth = 0.5
 % x(in out),y(left right),z(up down),yaw[z],pitch[y],roll[x]
 pose = [depth,-0.03,0,0,0,0];
 unityImageLeft = unityLink(client,pose);
@@ -27,10 +27,11 @@ imagesc(formated_frame_1)
 
 subplot(3,4,3)
 imshow(formated_frame_1)
-[center, radius] = imfindcircles(formated_frame_1,[25 75],"Sensitivity",0.80)
+centroid = regionprops(formated_frame_1,'Centroid')
+%[center, radius] = imfindcircles(formated_frame_1,[5 45],"Sensitivity",0.70)
 hold on
-viscircles(center, radius, 'Color', 'red')
-scatter(center(1), center(2))
+%viscircles(center, radius, 'Color', 'red')
+%scatter(center(1), center(2))
 
 %%% 2
 pose = [depth,0.03,0,0,0,0];
@@ -46,13 +47,17 @@ imagesc(formated_frame_2)
 
 subplot(3,4,4)
 imshow(formated_frame_2)
-[center, radius] = imfindcircles(formated_frame_2,[25 75],"Sensitivity",0.80)
+centroid_2 = regionprops(formated_frame_2,'Centroid')
+%[center, radius] = imfindcircles(formated_frame_2,[5 45],"Sensitivity",0.70)
 hold on
-viscircles(center, radius, 'Color', 'red')
-scatter(center(1), center(2))
+%viscircles(center, radius, 'Color', 'red')
+%scatter(center(1), center(2))
 
+
+%%% Everything past 0.5 meters is working  wonderfully; check on the region
+%%% of interest thing Kaputa mentioned
 %%% 3
-%depth = -1.25
+depth = -1.25
 % x(in out),y(left right),z(up down),yaw[z],pitch[y],roll[x]
 pose = [depth,-0.03,0,0,0,0];
 unityImageLeft = unityLink(client,pose);
@@ -67,7 +72,7 @@ imagesc(formated_frame_1)
 
 subplot(3,4,7)
 imshow(formated_frame_1)
-[center, radius] = imfindcircles(formated_frame_1,[25 75],"Sensitivity",0.80)
+[center, radius] = imfindcircles(formated_frame_1,[5 80],"Sensitivity",0.80)
 hold on
 viscircles(center, radius, 'Color', 'red')
 scatter(center(1), center(2))
@@ -86,13 +91,13 @@ imagesc(formated_frame_2)
 
 subplot(3,4,8)
 imshow(formated_frame_2)
-[center, radius] = imfindcircles(formated_frame_2,[25 75],"Sensitivity",0.80)
+[center, radius] = imfindcircles(formated_frame_2,[5 80],"Sensitivity",0.80)
 hold on
 viscircles(center, radius, 'Color', 'red')
 scatter(center(1), center(2))
 
 %%% 5
-%depth = -3
+depth = -3
 % x(in out),y(left right),z(up down),yaw[z],pitch[y],roll[x]
 pose = [depth,-0.03,0,0,0,0];
 unityImageLeft = unityLink(client,pose);
@@ -107,7 +112,7 @@ imagesc(formated_frame_1)
 
 subplot(3,4,11)
 imshow(formated_frame_1)
-[center, radius] = imfindcircles(formated_frame_1,[25 75],"Sensitivity",0.80)
+[center, radius] = imfindcircles(formated_frame_1,[5 80],"Sensitivity",0.80)
 hold on
 viscircles(center, radius, 'Color', 'red')
 scatter(center(1), center(2))
@@ -126,7 +131,7 @@ imagesc(formated_frame_2)
 
 subplot(3,4,12)
 imshow(formated_frame_2)
-[center, radius] = imfindcircles(formated_frame_2,[25 75],"Sensitivity",0.80)
+[center, radius] = imfindcircles(formated_frame_2,[5 80],"Sensitivity",0.80)
 hold on
 viscircles(center, radius, 'Color', 'red')
 scatter(center(1), center(2))
